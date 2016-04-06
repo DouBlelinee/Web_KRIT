@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+
+  <title>Assignment2</title>
+ </head>
+ <body>
+  <center><canvas  id = "canvas"   width = "1000" height = "600"  style ="border:1px solid"></canvas></center>
+   <audio class="thumbnail" id="jojo" >
+    <source src="song.ogg" type="audio/ogg" />
+    <source src="music/jojo.mp3" type="audio/mpeg" />
+    
+</audio>
+<audio class="thumbnail" id="jump2" >
+    <source src="song.ogg" type="audio/ogg" />
+    <source src="music/jump.mp3" type="audio/mpeg" />
+    
+</audio>
+<script type="text/javascript">
+  var speedanimol  = 10;
+  var  canvas = document.getElementById("canvas");
+  var  ctx =  canvas.getContext("2d");
+  canvas.addEventListener("click", mouseClick, false);
+ var page = 0 ;
+  var bg1 =  new Image();
+  var Howto = new Image ();
+  var Platbtn = new Image();
+  var ky = new Image();
+  var obstacle = new Image();
+  var lion = new Image();
+  var tiger = new Image();
+  var candy1 = new Image();
+  var hp = new Image();
+  var hp2 = new Image();
+  var hee = new Image();
+  var chang = new Image();
+  var cat = new Image();
+  var pig = new Image();
+    var nextgame  = new Image();
+  var howtoplay1 = new Image();
+  var howtoplay2 = new Image();
+  var howtoplay3 = new Image();
+  var howtoplay4 = new Image();
+  var howtoplay5 = new Image();
+  var timeloop = null ; 
+ 
+  var ximg =  0;
+  var spritey = 0;
+  var xky = 200 ;
+  var yky = 420 ;
+  var jump = false;
+  var keyjump = 0;
+  var speedjump = 15;
+  var counttime = 0 ;
+  var i = 0;
+  var scroe = 0 ; 
+  var hpky = 160;
+  var crashcheck = false;
+  var speedc = 5;
+
+  var xobstacle =[1000,1400,1900,2800,4000,4100,5400,5800,5900,6250,8400,8550,10600,11000];
+  var xlion =  [2300,3100,3500,4500,4950,6900,7600,8000,9000,9500,9900,10400,-500];
+  
+  var xchang = [13100,14000,14500,14900,16200,16600,17000,17500,18200,19000,-500,-500,-500];
+  var xpig = [12000,12400,12700,13600,15300,15700,15800,17400,17900,18600,-500,-500,-500];
+
+  var xtiger = [20000,-500,20600,20900,21900,22600,23400,24400,24800,25800,26200,-500,-500];
+  var xcat = [21000,21100,-500,21400,21600,22200,23000,23800,23900,24000,25200,26700,26900];
+
+  var xcandy1 = [1020,1940,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000,16000,17000,18000,19000,20000,21000,22000,23000,24000];
+  var ycandy1 = [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300];
+ 
+  var vid = document.getElementById("jojo"); 
+  var jump = document.getElementById("jump2"); 
+  
+
+	Howto.src = "images/Howto.png";
+   Platbtn.src = "images/Platbtn.png";
+   ky.src = "images/runrun.png";
+   bg1.src = "images/title-01.jpg";
+   obstacle.src = "images/S6.png" ; 
+   lion.src = "images/S1.png";
+   tiger.src = "images/S4.png";
+   candy1.src = "images/candy1.png";
+   hp.src = "images/tube.png";
+   hp2.src = "images/tube2.png";
+   hee.src = "images/heart.png";
+   chang.src = "images/S3.png";
+   cat.src = "images/S8.png" ;
+   pig.src = "images/S7.png";
+   nextgame.src = "images/D2.png";
+   howtoplay1.src = "images/1-01.jpg";
+    howtoplay2.src = "images/2-01.jpg";
+	 howtoplay3.src = "images/3-01.jpg";
+	  howtoplay4.src = "images/4-01.jpg";
+	   howtoplay5.src = "images/5-01.jpg";
+
+   var audioDie = new Audio('music/jump.mp3');
+   var audioc = new Audio('music/PUNCH.mp3');
+   var audiogame = new Audio('music/game.mp3');
+   bg1.onload = function()
+   { if(page ==0) {
+      ctx.drawImage(bg1,0,0);
+	 
+	  ctx.drawImage(Howto , 500,400);
+	  ctx.drawImage( Platbtn, 200,400);
+   }
+   
+	 // ctx.font="50px  Impact,Charcoal,sans-serif";
+	 // ctx.fillStyle = "rgb(0,0,255)";
+	 // ctx.fillText("Click To Play  KKy run ",300,500);
+
+   }
+ var x = 0 ;
+ var y = 0;
+  function  mouseClick(ev)
+  {
+
+	 
+	  x = ev.layerX ;
+	  y = ev.layerY;
+	 
+	  if(x>=236&&x<=423)
+		if(y>=419 &&y<=476)
+					page= 1;
+
+			 if(x>=538&&x<=723)
+				if(y>=419 &&y<=475)
+						page= 2 ;
+
+					if(page==2){
+						if(x>=390&&x<=569)
+							if(y>=491 &&y<=543)
+										page = 3 ;
+					}
+					 else if(page==3){
+						if(x>=390&&x<=569)
+							if(y>=491 &&y<=543)
+										page = 4 ;
+					 }
+					else if(page==4){
+						if(x>=390&&x<=569)
+							if(y>=491 &&y<=543)
+									page = 5 ;
+					}
+
+					else if(page==5){
+						if(x>=390&&x<=569)
+							if(y>=491 &&y<=543)
+									page = 6 ;
+								}
+
+					else if(page==6){
+						if(x>=390&&x<=569)
+							if(y>=491 &&y<=543)
+									page = 1 ;}
+								
+					
+    startgame();
+	
+  }
+  
+
+
+
+ function startgame()
+ {
+	
+	 if(page ==0) {
+		 bg1.src = "images/title-01.jpg";
+		 	bg1.onload = function(){
+		
+		
+			
+		ctx.drawImage(bg1,0,0);
+	  ctx.drawImage(Howto , 500,400);
+	  ctx.drawImage( Platbtn, 200,400);
+	   }
+	  }
+		
+	if(page==1)
+	 {		
+		bg1.src = "images/BG0101.jpg";
+		canvas.removeEventListener("click", mouseClick, false);
+		
+		if(timeloop == null)
+		{
+			
+		timeloop = setInterval(Update , 1000/25);
+		document.addEventListener("keypress",KEYDOWN, false);
+		 audiogame.play();
+		
+		}
+
+	 }
+	 if(page == 2 ){
+		  bg1.src = "images/1-01.jpg";
+			 bg1.onload = function(){
+		
+		 ctx.drawImage(bg1,0,0);
+			 }
+	 }
+	else if(page == 3 ){
+		  bg1.src = "images/2-01.jpg";
+			 bg1.onload = function(){
+		
+		 ctx.drawImage(bg1,0,0);
+			 }
+	 }
+	  else if(page == 4 ){
+		  bg1.src = "images/3-01.jpg";
+			 bg1.onload = function(){
+			
+		 ctx.drawImage(bg1,0,0);
+			 }
+	 }
+	else  if(page == 5 ){
+		  bg1.src = "images/4-01.jpg";
+			 bg1.onload = function(){
+		
+		 ctx.drawImage(bg1,0,0);
+			 }
+	 }
+	 else if(page == 6 ){
+		  bg1.src = "images/5-01.jpg";
+			 bg1.onload = function(){
+			
+		 ctx.drawImage(bg1,0,0);
+			 }
+	 }
+ }
+
+
+
+ function Update()
+ {		
+		scroe +=10;
+		if(scroe >=1000) speedanimol = 10;
+		hpky -=0.10;
+		ximg -=5;
+		counttime++;
+		if(hpky<0){
+			hpky=0;
+			 clearInterval(timeloop);
+			audiogame.pause();
+			alert("you lose  Scroe :"+ (scroe/7700).toFixed(2)+"  KG");
+			newgame();
+			 
+			}
+		if(hpky>200)hpky =200;
+		if(counttime %2 == 0 )
+		spritey +=100;//chan ky
+		if(spritey >=500)spritey = 0 ;
+		if(ximg <=-15000)ximg =0;
+		ctx.drawImage(bg1,ximg,0);//imagesMove
+		crash();
+		check ();
+		checkcandy();
+		movesus();
+		moveitem();
+
+		if(jump == true)
+		{  
+			
+			jumpky();
+			if(keyjump==1)
+			{
+			spritey = 500;
+			}
+		   else if(keyjump==2)
+			{ 
+				spritey = 600;
+			}
+			else {spritey = 500;}
+			ctx.drawImage(ky,0,spritey,100,100,xky,yky,100,100);
+			//ctx.strokeRect(xky+20,yky+20,70,70);	
+		}
+		else
+		{
+		ctx.drawImage(ky,0,spritey,100,100,xky,yky,100,100);
+		//ctx.strokeRect(xky+20,yky+20,70,70);	
+		}
+	// font coloe
+	ctx.font = "40px Impact,Charcoal,sans-serif";
+	ctx.fillStyle = "rgb(255,0,255)";
+	ctx.drawImage(hp2,95,43);
+	ctx.drawImage(hp,0,0,160,17,95,45,hpky,17);
+	
+	ctx.drawImage(hee,70,30);
+	
+	ctx.drawImage(ky,0,spritey,100,100,550,15,100,100);
+    ctx.fillText((scroe/7700).toFixed(2) +"   KG",700, 70);
+ }
+ function KEYDOWN(e)
+ {		
+	// keyspecbar
+		
+	 if(e.keyCode== 32)
+	 {		
+		
+		if(keyjump !=3){
+		  keyjump++;
+		  audioDie.currentTime = 0.20;
+		  audioDie.play();
+		}
+			 
+	
+		i=0;
+		if(keyjump != 0)
+		{
+		  speedjump = 15;
+		}
+		//alert(keyjump+"  "+i +" "+speedjump);	
+		jump=true;	
+		
+	 }
+	
+ }
+
+function jumpky ()
+{	//ก   jumping 
+	//ctx.fillText(speedjump+" "+i+ " "+keyjump,100, 100);
+	
+	yky -= speedjump;
+    i +=10;
+	if(keyjump==1)
+	{  
+		if(i==100)
+		{
+			 audioDie.pause();  
+			 audioDie.currentTime = 0;
+  
+				speedjump = -speedjump;
+				i=0;
+		}
+	   if(yky>=420)
+		{
+		
+			yky= 420;
+			jump = false;
+			keyjump = 0;
+			 audioDie.pause();  
+			audioDie.currentTime = 0;
+		}
+	}
+	if(keyjump==2)
+	{
+		if(i==100)
+		{
+				 audioDie.pause();
+				 
+				 audioDie.currentTime = 0;
+				speedjump = -speedjump;
+
+		}
+	   if(yky>=420)
+		{
+			yky= 420;
+			jump = false;   
+			speedjump = -speedjump;
+			keyjump = 0;
+		audioDie.pause();  
+		audioDie.currentTime = 0;
+		}
+	}
+	if(keyjump == 3 )
+	{		
+		     document.removeEventListener("keypress",KEYDOWN,false);
+		     speedjump = -10;
+		if(yky>=420)
+		{
+			 yky= 420;
+			 jump = false;
+			 speedjump = -speedjump;
+			 keyjump =0 ;
+			 document.addEventListener("keypress",KEYDOWN, false);
+		}	
+	}
+}
+
+function crash()
+{
+   if(crashcheck == true)
+   { ky. src = "images/runrun2.png";
+	  // ctx.fillText("crash",500,500);
+		xky -= speedc;
+		if(xky<=100)speedc = -speedc;
+		if(xky>=200)
+		{
+			speedc = -speedc;
+			xky=200;
+			ky. src = "images/runrun.png";
+			crashcheck = false;
+		}
+   
+   }
+
+
+
+}
+var   xgame =28500;
+function movesus()
+	{     
+		 xgame -=  speedanimol ;
+		  ctx.drawImage(nextgame,xgame,350);
+	  for(var i = 0 ; i<13 ; i++)//book1
+	  {
+	      xobstacle[i]-= speedanimol ;
+	      ctx.drawImage(obstacle,xobstacle[i],420);
+	     // ctx.strokeRect(xobstacle[i]+10,420,obstacle.width-10,obstacle.height);
+		  //lion
+		  xlion[i]-= speedanimol ;
+		  ctx.drawImage(lion,xlion[i],380);
+		  //ctx.strokeRect(xlion[i]+20,380,lion.width-28,lion.height);
+		  //tiger
+		  xtiger[i]-= speedanimol ;
+		  ctx.drawImage(tiger,xtiger[i],380);
+		 // ctx.strokeRect(xtiger[i]+20,380,tiger.width-28,tiger.height);
+		//chang
+		  xchang[i]-= speedanimol ;
+		  ctx.drawImage(chang,xchang[i],380);
+
+		  //cat
+		   xcat[i]-= speedanimol ;
+		  ctx.drawImage(cat,xcat[i],430);
+		  //ctx.strokeRect(xcat[i]+10,420,cat.width-10,cat.height);
+			//pig
+		   xpig[i]-= speedanimol ;
+		  ctx.drawImage(pig,xpig[i],430);
+		
+
+	  }
+	  
+	
+	}
+function moveitem()
+{
+	 for(var i = 0 ; i<120 ; i++)
+	  {
+		  xcandy1[i]-= speedanimol  ;
+	      ctx.drawImage(candy1,xcandy1[i],ycandy1[i]);
+	     // ctx.strokeRect(xcandy1[i],420,candy1.width,candy1.height);
+	  }
+}
+ 
+function check()
+{
+		
+	
+	
+
+		for (var k = 0 ; k <13 ; k++ )
+		{
+
+			var kycheck = {
+				left:xky+20,
+				right:xky + 60,
+				top:yky+20,
+				bottom:yky + 70,
+			};
+			var obstaclecheck = 
+			{
+				left:xobstacle[k]+10,
+				right:xobstacle[k]+50,
+				top:420,
+				bottom:420+100,
+			
+			
+			};
+
+			var catcheck = 
+			{
+				left:xcat[k]+10,
+				right:xcat[k]+50,
+				top:420,
+				bottom:420+100,
+			
+			
+			};
+
+			var pigcheck = 
+			{
+				left:xpig[k]+10,
+				right:xpig[k]+50,
+				top:420,
+				bottom:420+100,
+			
+			
+			};
+			var lioncheck = 
+			{
+				left:xlion[k]+20,
+				right:xlion[k]+100,
+				top:380,
+				bottom:380+150,
+			
+			
+			};
+			var tigercheck = 
+			{
+				left:xtiger[k]+20,
+				right:xtiger[k]+100,
+				top:380,
+				bottom:380+150,
+			
+			
+			};
+			var changcheck = 
+			{
+				left:xchang[k]+20,
+				right:xchang[k]+100,
+				top:380,
+				bottom:380+150,
+			
+			
+			} ;
+			var  gamecheck = {
+		
+				left:xgame,
+				right:xgame +100,
+				top:300,
+				bottom:300+5000,
+		
+		
+		};
+			if(intersectRect(kycheck,obstaclecheck))
+			{
+				crashcheck = true;
+				hpky -=20;
+				xobstacle[k]=100;
+				
+				
+				 audioc.play();
+				
+			} ;
+			if(intersectRect(kycheck,catcheck))
+			{
+				crashcheck = true;
+				hpky -=20;
+				xcat[k]=100;
+			
+				audioc.play();
+				
+			} ;
+			if(intersectRect(kycheck,pigcheck))
+			{
+				crashcheck = true;
+				hpky -=20;
+				xpig[k]=100;
+				audioc.play();
+				
+			} ;
+			if(intersectRect(kycheck,lioncheck))
+			{
+				crashcheck = true;
+				
+				xlion[k]=100;
+				hpky -=20;
+				
+				audioc.play();
+			};
+			if(intersectRect(kycheck,tigercheck))
+			{
+				
+				crashcheck = true;
+				hpky -=20;
+				xtiger[k]=100;
+				
+				 audioc.play();
+			}
+			if(intersectRect(kycheck,changcheck))
+			{
+				crashcheck = true;
+				hpky -=20;
+				xchang[k]=100;
+				
+				 audioc.play();
+				
+			} ;
+			if(intersectRect(kycheck,gamecheck))
+			{	 newgame();	
+				
+					
+			};
+		
+		}
+
+		
+		
+	
+}
+function  checkcandy()
+{
+
+		for (var k2 = 0 ; k2 <24 ; k2++ )
+		{
+			var kycheck2 = {
+				left:xky+20,
+				right:xky + 70,
+				top:yky+20,
+				bottom:yky + 70,
+			};
+			var candy1check = {
+				left:xcandy1[k2],
+				right:xcandy1[k2]+50,
+				top:ycandy1[k2],
+				bottom:ycandy1[k2]+50,
+			};
+			if(intersectRect(kycheck2,candy1check)){ xcandy1[k2]=-100;  hpky +=10} 
+		}
+
+
+}
+function intersectRect(r1, r2) {
+  return !(r2.left > r1.right || 
+           r2.right < r1.left || 
+           r2.top > r1.bottom ||
+           r2.bottom < r1.top);
+}
+
+
+function  newgame()
+{
+	canvas.addEventListener("click", mouseClick, false);
+					page = 0 ;
+					clearInterval(timeloop);
+					timeloop = null;
+					alert(" you win  Scroe :"+(scroe/7700).toFixed(2)+"  KG");
+				
+					startgame();
+					ky. src = "images/runrun.png";
+	xgame =28500;				
+ ximg =  0;
+  spritey = 0;
+   xky = 200 ;
+   yky = 420 ;
+   jump = false;
+   keyjump = 0;
+   speedjump = 15;
+   counttime = 0 ;
+   i = 0;
+   scroe = 0 ; 
+   hpky = 160;
+  crashcheck = false;
+  speedc = 5;
+ speedanimol  = 10;
+   xobstacle =[1000,1400,1900,2800,4000,4100,5400,5800,5900,6250,8400,8550,10600,11000];
+  xlion =  [2300,3100,3500,4500,4950,6900,7600,8000,9000,9500,9900,10400,-500];
+  
+   xchang = [13100,14000,14500,14900,16200,16600,17000,17500,18200,19000,-500,-500,-500];
+   xpig = [12000,12400,12700,13600,15300,15700,15800,17400,17900,18600,-500,-500,-500];
+
+   xtiger = [20000,-500,20600,20900,21900,22600,23400,24400,24800,25800,26200,-500,-500];
+  xcat = [21000,21100,-500,21400,21600,22200,23000,23800,23900,24000,25200,26700,26900];
+
+  xcandy1 = [1020,1940,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000,16000,17000,18000,19000,20000,21000,22000,23000,24000];
+   ycandy1 = [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300];
+
+
+
+
+}
+
+  </script>
+
+
+
+
+
+
+ </body>
+</html>
